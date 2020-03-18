@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_083107) do
+ActiveRecord::Schema.define(version: 2020_03_18_084552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "daysoffs", force: :cascade do |t|
+    t.integer "paiddaysoff"
+    t.integer "unpaiddaysoff"
+    t.float "absenteism"
+    t.integer "injurydaysoff"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.date "startdate"
+    t.date "enddate"
+    t.boolean "confirmed"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +42,18 @@ ActiveRecord::Schema.define(version: 2020_03_18_083107) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "accesstype"
+    t.integer "level"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "matricule"
+    t.string "department"
+    t.bigint "daysoff_id"
+    t.index ["daysoff_id"], name: "index_users_on_daysoff_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "requests", "users"
+  add_foreign_key "users", "daysoffs"
 end
