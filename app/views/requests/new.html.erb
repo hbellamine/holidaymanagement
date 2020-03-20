@@ -1,0 +1,20 @@
+<%= simple_form_for [@request] do |f| %>
+  <%= f.input :startdate, id:'bar' %>
+  <%= f.input :enddate, id:'bar' %>
+  <%= f.submit %>
+<% end %>
+
+
+<script type="text/javascript">
+  const el = document.getElementById('bar');
+  flatpickr(el, {
+    enableTime:      true,
+    altInput:        true,
+    minDate:         "today",
+    altFormat:       "F j, Y at h:i K",
+    dateFormat:      "Y-m-d H:i",
+    defaultHour:     23,
+    defaultMinute:   59,
+    minuteIncrement: 1
+  });
+</script>

@@ -10,28 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_084552) do
+ActiveRecord::Schema.define(version: 2020_03_20_190312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "daysoffs", force: :cascade do |t|
-    t.integer "paiddaysoff"
-    t.integer "unpaiddaysoff"
-    t.float "absenteism"
-    t.integer "injurydaysoff"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "requests", force: :cascade do |t|
-    t.date "startdate"
-    t.date "enddate"
-    t.boolean "confirmed"
+    t.string "startdate"
+    t.string "enddate"
+    t.boolean "confirmed", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "commentaire", default: ""
+    t.integer "managermatricule"
     t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "managermatricule"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,16 +44,24 @@ ActiveRecord::Schema.define(version: 2020_03_18_084552) do
     t.datetime "updated_at", null: false
     t.integer "accesstype"
     t.integer "level"
-    t.string "firstname"
-    t.string "lastname"
+    t.string "prenom"
+    t.string "nom"
     t.string "matricule"
-    t.string "department"
-    t.bigint "daysoff_id"
-    t.index ["daysoff_id"], name: "index_users_on_daysoff_id"
+    t.string "direction"
+    t.integer "paiddaysoff"
+    t.integer "unpaiddaysoff"
+    t.integer "absenteism"
+    t.integer "injurydaysoff"
+    t.integer "service"
+    t.string "emploi"
+    t.bigint "team_id"
+    t.date "datedenaissance"
+    t.date "datedembauche"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
   add_foreign_key "requests", "users"
-  add_foreign_key "users", "daysoffs"
+  add_foreign_key "users", "teams"
 end

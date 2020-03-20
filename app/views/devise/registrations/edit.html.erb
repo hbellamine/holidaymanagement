@@ -21,6 +21,42 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+
+    <%= f.input :firstname,
+                 required: true,
+                 autofocus: true,
+                 input_html: { autocomplete: "firstname" }%>
+
+    <%= f.input :lastname,
+                 required: true,
+                 autofocus: true,
+                 input_html: { autocomplete: "lastname" } %>
+
+    <%= f.input :department,
+                 required: true,
+                 autofocus: true,
+                 input_html: { autocomplete: "department" }%>
+
+    <%= f.input :matricule,
+                required: true,
+                 autofocus: true,
+                 input_html: { autocomplete: "matricule" } %>
+
+    <%= f.input :accesstype,
+                 required: true,
+                collection: User.accesstypes.keys,
+                 autofocus: true,
+                 input_html: { autocomplete: "accesstype" }%>
+
+
+    <%= f.input :level,
+                 required: true,
+                collection: User.levels.keys,
+                 autofocus: true,
+                 input_html: { autocomplete: "level" }%>
+
+
+
   </div>
 
   <div class="form-actions">

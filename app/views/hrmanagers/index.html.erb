@@ -1,0 +1,29 @@
+<h1>Bonjour <%=current_user.prenom %> <%=current_user.nom%></h1>
+
+<h1>Ci-dessous l'état des congés de vos équipes</h1>
+
+<table class="rwd-table">
+  <tr>
+    <th>Matricule</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Emploi</th>
+    <th>Date d'embauche</th>
+    <th>Solde congés payés</th>
+    <th>Nombre de congés sans soldes</th>
+    <th>Nombre de jours lié à un accident</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td data-th="Matricule"><%= user.matricule%></td>
+      <td data-th="Nom"><%= user.nom %></td>
+      <td data-th="Prénom"><%= user.prenom %></td>
+      <td data-th="Emploi"><%= user.emploi %></td>
+      <td data-th="Date d'embauche"><%= user.datedembauche%></td>
+      <td data-th="Solde congés payés"><%= user.paiddaysoff%></td>
+      <td data-th="Nombre de congés sans soldes"><%= user.unpaiddaysoff%></td>
+      <td data-th="Nombre de jours lié à un accident"><%= user.injurydaysoff%></td>
+    </tr>
+  <%end%>
+
+</table>
