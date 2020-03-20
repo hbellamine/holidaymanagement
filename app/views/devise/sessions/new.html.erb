@@ -1,20 +1,56 @@
-<h2>Log in</h2>
+<div class="wrapper">
+  <center><%= image_tag "https://www.vitalait.net/wp-content/themes/vitalait/imgs/logo.png" %></center>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  <div class="login">
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <center><p class="title">Plateforme de gestion des congés </p></center>
+        <div class="form-inputs">
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: { autocomplete: "Email"}
+                         %>
+
+
+            <%= f.input :password,
+                        required: false,
+                        input_html: { autocomplete: "Password"} %>
+
+          <%= f.input :remember_me, label: "Se rappeller", as: :boolean if devise_mapping.rememberable? %>
+       </div>
+
+        <div class="form-actions">
+          <button >
+          <span><%= f.button :submit, "Se connecter", class: "state"%></span>
+        </button>
+        </div>
+
+        <% end %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+
+<!--
+<div class="wrapper">
+  <form class="login">
+    <p class="title">Log in</p>
+    <input type="text" placeholder="Username" autofocus/>
+    <i class="fa fa-user"></i>
+    <input type="password" placeholder="Password" />
+    <i class="fa fa-key"></i>
+    <a href="#">Forgot your password?</a>
+    <button>
+      <i class="spinner"></i>
+      <span class="state">Log in</span>
+    </button>
+  </form>
+  <footer><a target="blank" href="http://boudra.me/">boudra.me</a></footer>
+  </p>
+</div>
+ -->
+
+
+
+
