@@ -1,0 +1,50 @@
+<div class="muck-up">
+  <div class="overlay"></div>
+  <div class="top">
+
+    <div class="user-profile">
+      <img src="https://raw.githubusercontent.com/arjunamgain/FilterMenu/master/images/profile.jpg">
+      <div class="user-details">
+        <h4><%=@user.prenom%> <%=@user.nom%></h4>
+        <p><%= @user.emploi %></p>
+        <p>matricule: <%= @user.matricule %></p>
+        <p>Date d'embauche: <%= @user.datedembauche %></p>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="title">
+      <center><h3>Mes informations pour l'année <%=Date.current.year%></h3></center>
+      <small>Aujourd'hui <%= Date.current %></small>
+    </div>
+    <ul class="tasks">
+      <li class="one green">
+        <span class="task-title">Solde congés payés </span>
+        <span class="task-time"><%= @user.paiddaysoff%></span>
+
+        <!-- <span class="task-cat">Web App</span> -->
+
+      </li>
+      <li class="one green">
+        <span class="task-title">Solde congés sans solde</span>
+        <span class="task-time"><%= @user.paiddaysoff%></span>
+        <!-- <span class="task-cat">Mobile Project</span> -->
+
+      </li>
+      <li class="one red">
+        <span class="task-title">Jours liés aux accidents </span>
+        <span class="task-time"><%= @user.injurydaysoff%></span>
+       <!--  <span class="task-cat">Company Web site</span> -->
+
+      </li>
+
+    </ul>
+
+  <%= render 'shared/requestbymanager' %>
+
+  <center><%= link_to "Retour", managers_path, class: "btn btn-danger", style:"margin-top:15px"%></center>
+  </div>
+
+  </div>
+
+

@@ -1,0 +1,62 @@
+<center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">
+ Demander un congé
+</button>
+</center>
+
+<!-- Modal -->
+<div class="modal" id="ModalCenter" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <div class="modal-content">
+
+<% if @user.paiddaysoff > 0 %>
+  <%= simple_form_for [@request] do |f| %>
+
+
+        <div class="modal-header">
+          <center><h5 class="modal-title" id="exampleModalCenterTitle">Formulaire de demande de congés</h5></center>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+      <div class="modal-body">
+
+        <%= f.input :dates, label: "Du - Au (inclus)", as: :string, input_html: { class: "datepicker"} %>
+        <%= f.input :commentaire %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Valider la demande", class: "btn btn-primary" %>
+      </div>
+
+      <% end %>
+<%else%>
+
+        <div class="modal-header">
+          <center><h5 class="modal-title" id="exampleModalCenterTitle">Formulaire de demande de congés</h5></center>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+      <div class="modal-body">
+        <%= "Votre solde de congés est à 0" %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+  <%end%>
+    </div>
+
+  </div>
+</div>
+
+
+
+

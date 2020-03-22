@@ -183,7 +183,7 @@ span.toggle-btn.ion-android-funnel:hover{
 
 .muck-up .bottom {
   background-color: #fff;
-  min-height: 303px;
+  min-height: 100vh;
   z-index: 1;
   padding: 35px;
   position: relative;
@@ -194,13 +194,13 @@ span.toggle-btn.ion-android-funnel:hover{
 .bottom:after {
   content: '';
   position: absolute;
-  top: -46px;
+  top: -32px;
   background: #fff;
-  left: -22px;
+  left: -25px;
   right: 0;
   height: 100px;
-  transform: rotate(10deg);
-  width: 337px;
+  transform: rotate(5deg);
+  width: 1000px;
   z-index: -1;
 }
 
