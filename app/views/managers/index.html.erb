@@ -1,7 +1,6 @@
-<h1>Bonjour <%=current_user.prenom %> <%=current_user.nom%></h1>
-
-<h1>Ci-dessous l'état des congés de vos équipes</h1>
-
+<h1 style="color: white; text-align: center">Bonjour <%=current_user.prenom %> <%=current_user.nom%></h1>
+<h1 style="color: white; text-align: center">Ci-dessous l'état des congés de vos équipes</h1>
+<%= link_to "Demande de congés de mon équipe", myteam_requests_path, class:"btn btn-primary"%>
 <table class="rwd-table">
   <tr>
     <th>Matricule</th>

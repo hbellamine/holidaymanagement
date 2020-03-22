@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :requests
   end
 
+   get 'myteam_requests', to: 'requests#myteamrequests' , as: 'myteam_requests'
+   get 'refus_request', to: 'requests#refus' , as: 'requests_refus'
 
   devise_for :users
 

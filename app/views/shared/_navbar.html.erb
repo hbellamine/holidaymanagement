@@ -1,5 +1,5 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "#", class: "navbar-brand" do %>
+  <%= link_to managers_path, class: "navbar-brand" do %>
     <%= image_tag "https://www.vitalait.net/wp-content/themes/vitalait/imgs/logo.png" %>
     <% end %>
 
@@ -12,10 +12,12 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "dropdown-item btn btn-danger" %>
         </li>
         <li class="nav-item">
+          <%if current_user.accesstype == "employe"%>
           <%= link_to "Demande de congés", new_request_path, class: "nav-link" %>
+          <%end%>
         </li>
       <% else %>
         <li class="nav-item">
