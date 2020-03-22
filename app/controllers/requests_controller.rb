@@ -7,6 +7,12 @@ class RequestsController < ApplicationController
     @requests = Request.where(managermatricule: current_user.matricule).order('confirmed ASC')
   end
 
+  def myteammember
+    @user = User.find(params[:id])
+    @request = Request.new
+  end
+
+
 
   def create
 
@@ -18,7 +24,9 @@ class RequestsController < ApplicationController
     if (current_user.paiddaysoff < nbofdays)
       redirect_to employees_path, alert: "Vos jours de congés sont insuffisants"
     else
+      current_user.paiddaysoff = current_user.paiddaysoff - (enddate - startdate).to_i
       @request = Request.new(user: current_user, startdate: startdate, enddate: enddate,commentaire: params[:request][:commentaire], dates: params[:request][:dates], managermatricule: managermatricule )
+      current_user.save
       @request.save
 
       redirect_to employees_path, notice: "Votre demande a bien été prise en compte"
@@ -33,7 +41,7 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     @request.confirmed = "Validé"
     @user = User.find(@request.user_id)
-    @user.paiddaysoff = @user.paiddaysoff - ((@request.enddate - @request.startdate).to_i)
+
     #il faut envoyer le mail ici
     @request.save
     @user.save
@@ -43,10 +51,13 @@ class RequestsController < ApplicationController
   end
 
   def refus
-    @request = Request.find(params[:id])
+    @request = Request.find(params[:format])
     @request.confirmed = "Refusé"
+    @user = User.find(@request.user_id)
     #il faut envoyer le mail ici
+    @user.paiddaysoff = @user.paiddaysoff + ((@request.enddate - @request.startdate).to_i)
     @request.save
+    @user.save
     redirect_to myteam_requests_path, notice: "Le congé a bien été refusé"
   end
 

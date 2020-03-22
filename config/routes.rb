@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
    get 'myteam_requests', to: 'requests#myteamrequests' , as: 'myteam_requests'
+   get 'myteammember/:id', to: 'requests#myteammember' , as: 'myteammember'
    get 'refus_request', to: 'requests#refus' , as: 'requests_refus'
 
   devise_for :users

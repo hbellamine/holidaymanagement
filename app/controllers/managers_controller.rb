@@ -2,8 +2,17 @@ class ManagersController < ApplicationController
   before_action :is_manager?
 
   def index
+
+  if !params[:search].nil? and params[:search] != ""
+
+    @team = Team.where(managermatricule: current_user.matricule.to_i).ids[0]
+    @users = User.where(team_id: @team).search_by_nom_and_prenom(params[:search])
+  else
     @team = Team.where(managermatricule: current_user.matricule.to_i).ids[0]
     @users = User.where(team_id: @team).order('nom ASC')
+  end
+
+
   end
 
   def create
