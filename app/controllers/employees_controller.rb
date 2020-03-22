@@ -1,9 +1,12 @@
 class EmployeesController < ApplicationController
   def index
     @user = current_user
+    @request = Request.new
+
   end
 
   def create
+
   end
 
   def new

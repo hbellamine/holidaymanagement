@@ -1,0 +1,52 @@
+<h1 style="color: white; text-align: center">Bonjour <%=current_user.prenom %> <%=current_user.nom%></h1>
+
+
+<h1 style="color: white; text-align: center">Ci-dessous les demandes de congés de votre équipe</h1>
+
+<table class="rwd-table">
+  <tr>
+    <th>Matricule</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Emploi</th>
+    <th>Date d'embauche</th>
+    <th>Solde congés payés</th>
+    <th>Nombre de congés sans soldes</th>
+    <th>Nombre de jours lié à un accident</th>
+    <th>Date de congés demandées</th>
+    <th>Nombre de jours</th>
+    <th>Commentaire</th>
+    <th>Etat</th>
+    <th> Décision </th>
+  </tr>
+  <% @requests.each do |request| %>
+  <% user = User.find(request.user_id)%>
+    <tr>
+      <td data-th="Matricule"><%= user.matricule%></td>
+      <td data-th="Nom"><%= user.nom %></td>
+      <td data-th="Prénom"><%= user.prenom %></td>
+      <td data-th="Emploi"><%= user.emploi %></td>
+      <td data-th="Date d'embauche"><%= user.datedembauche%></td>
+      <td data-th="Solde congés payés"><%= user.paiddaysoff%></td>
+      <td data-th="Nombre de congés sans soldes"><%= user.unpaiddaysoff%></td>
+      <td data-th="Nombre de jours lié à un accident"><%= user.injurydaysoff%></td>
+      <td data-th="Dates de demande du congés"><%= request.dates%></td>
+      <td data-th="Nombre de jours demandés"><%= (request.enddate - request.startdate).to_i %> jours</td>
+      <td data-th="commentaire"><%= request.commentaire%></td>
+      <td data-th="Status"><% if request.confirmed == "En cours"%>
+          <%= "Attente de validation" %>
+          <% else %>
+          <%= request.confirmed %>
+          <%end%>
+      </td>
+      <td data-th="Décision"><% if request.confirmed == "En cours"%>
+        <%= link_to "Valider", edit_request_path(request) ,class: "btn btn-success", style: "margin-bottom: 5px" %>
+      <%= link_to "Refuser", requests_refus_path(request) ,class: "btn btn-danger" %>
+       <% else %>
+       <%= link_to "Validé","", class: "btn btn-primary" %>
+        <%end%>
+      </td>
+    </tr>
+  <%end%>
+
+</table>

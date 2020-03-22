@@ -1,2 +1,22 @@
-<h1>Requests#index</h1>
-<p>Find me in app/views/requests/index.html.erb</p>
+<h1 style="color:white; text-align: center">Bonjour <%=current_user.prenom %> <%=current_user.nom%></h1>
+
+<h2 style="color:lightgray;text-align: center">Ci-dessous l'état de vos demande de congés</h2>
+
+<table class="rwd-table">
+  <tr>
+
+    <th>Dates de demande du congés</th>
+    <th>Nombre de jours demandés</th>
+    <th>Validé/En cours d'étude/Refusé</th>
+
+  </tr>
+  <% @requests.each do |request| %>
+    <tr>
+
+      <td data-th="Dates de demande du congés"><%= request.dates%></td>
+      <td data-th="Nombre de jours demandés"><%= (request.enddate - request.startdate).to_i %> jours</td>
+      <td data-th="Status"><%= request.confirmed%></td>
+    </tr>
+  <%end%>
+
+</table>
