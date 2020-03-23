@@ -27,7 +27,7 @@
       </li>
       <li class="one green">
         <span class="task-title">Solde congés sans solde</span>
-        <span class="task-time"><%= @user.paiddaysoff%></span>
+        <span class="task-time"><%= @user.unpaiddaysoff%></span>
         <!-- <span class="task-cat">Mobile Project</span> -->
 
       </li>
@@ -38,11 +38,24 @@
 
       </li>
 
+            <li class="one red">
+        <span class="task-title">Nombre de jours d'absence injustifiée </span>
+        <span class="task-time"><%= @user.absenteism%></span>
+       <!--  <span class="task-cat">Company Web site</span> -->
+
+      </li>
+
     </ul>
 
   <%= render 'shared/requestbymanager' %>
+  <%= render 'shared/absenceupdate' %>
 
-  <center><%= link_to "Retour", managers_path, class: "btn btn-danger", style:"margin-top:15px"%></center>
+
+    <% if current_user.accesstype == "manager" %>
+      <center><%= link_to "Retour", managers_path, class: "btn btn-danger", style:"margin-top:15px"%></center>
+    <%elsif current_user.accesstype== "hrmanager"%>
+      <center><%= link_to "Retour", hrmanagers_path, class: "btn btn-danger", style:"margin-top:15px"%></center>
+    <%end%>
   </div>
 
   </div>

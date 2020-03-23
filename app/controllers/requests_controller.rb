@@ -13,6 +13,36 @@ class RequestsController < ApplicationController
   end
 
 
+  def absenceupdate
+
+      @user = User.find(params[:user_id])
+      startdate = Date.parse params[:request][:dates][0...10]
+      enddate = Date.parse params[:request][:dates][14...24]
+      nbofdays = (enddate - startdate).to_i
+      managermatricule = Team.find(@user.team.id).managermatricule
+      @request = Request.new(user: @user, startdate: startdate, enddate: enddate,commentaire: params[:request][:commentaire], dates: params[:request][:dates], managermatricule: managermatricule, confirmed: "Validé" )
+      @user.absenteism = @user.absenteism + (enddate - startdate).to_i
+      @request.save
+      @user.save
+      redirect_to myteammember_path(@user.id)
+  end
+
+  def updatebymanager
+    @user = User.find(params[:user_id])
+    startdate = Date.parse params[:request][:dates][0...10]
+    enddate = Date.parse params[:request][:dates][14...24]
+    nbofdays = (enddate - startdate).to_i
+    managermatricule = Team.find(@user.team.id).managermatricule
+    @request = Request.new(user: @user, startdate: startdate, enddate: enddate,commentaire: params[:request][:commentaire], dates: params[:request][:dates], managermatricule: managermatricule, confirmed: "Validé" )
+    @user.paiddaysoff = @user.paiddaysoff - (enddate - startdate).to_i
+    @request.save
+    @user.save
+    redirect_to myteammember_path(@user.id)
+  end
+
+
+
+
 
   def create
 
@@ -20,6 +50,7 @@ class RequestsController < ApplicationController
     startdate = Date.parse params[:request][:dates][0...10]
     enddate = Date.parse params[:request][:dates][14...24]
     nbofdays = (enddate - startdate).to_i
+
 
     if (current_user.paiddaysoff < nbofdays)
       redirect_to employees_path, alert: "Vos jours de congés sont insuffisants"

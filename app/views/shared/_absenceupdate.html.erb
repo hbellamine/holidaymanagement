@@ -1,0 +1,48 @@
+<center><button type="button" class="btn btn-primary" style = "margin-top:5px" data-toggle="modal" data-target="#Modalupdateabsence">
+ Ajouter des absences injustifiées
+</button>
+</center>
+
+<!-- Modal -->
+<div class="modal" id="Modalupdateabsence" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <div class="modal-content">
+
+
+  <%= simple_form_for [@request], :url => absenceupdate_path, :method => :post do |f| %>
+
+
+        <div class="modal-header">
+          <center><h5 class="modal-title" id="exampleModalCenterTitle">Formulaire de demande de congés</h5></center>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+      <div class="modal-body">
+
+        <%= f.input :dates, label: "Date de départ (inclus) - Date de retour(non inclus)", as: :string, input_html: { class: "datepicker"} %>
+        <%= f.input :commentaire %>
+        <%= hidden_field_tag 'user_id', @user.id %>
+                <h5>Nombre de jours</h5>
+        <div id="nbdaysabsence">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Déduire des congés", class: "btn btn-primary" %>
+      </div>
+
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+

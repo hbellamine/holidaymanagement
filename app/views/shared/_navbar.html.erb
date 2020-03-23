@@ -1,7 +1,14 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to managers_path, class: "navbar-brand" do %>
-    <%= image_tag "https://www.vitalait.net/wp-content/themes/vitalait/imgs/logo.png" %>
+  <% if current_user.accesstype == "hrmanager"%>
+    <%= link_to hrmanagers_path, class: "navbar-brand" do %>
+        <%= image_tag "https://www.vitalait.net/wp-content/themes/vitalait/imgs/logo.png" %>
     <% end %>
+  <% else %>
+    <%= link_to managers_path, class: "navbar-brand" do %>
+        <%= image_tag "https://www.vitalait.net/wp-content/themes/vitalait/imgs/logo.png" %>
+    <% end %>
+  <% end %>
+
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

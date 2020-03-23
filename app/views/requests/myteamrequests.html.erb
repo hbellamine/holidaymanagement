@@ -1,7 +1,12 @@
 <h1 style="color: white; text-align: center">Bonjour <%=current_user.prenom %> <%=current_user.nom%></h1>
 
 <h1 style="color: white; text-align: center">Ci-dessous les demandes de congés de votre équipe</h1>
-<%= link_to "Retour", managers_path, class: "btn btn-danger", style: "margin-left:30px"%>
+  <% if current_user.accesstype == "manager"%>
+    <%= link_to "Retour", managers_path, class: "btn btn-danger", style: "margin-left:30px"%>
+  <% else %>
+    <%= link_to "Retour", hrmanagers_path, class: "btn btn-danger", style: "margin-left:30px"%>
+  <%end%>
+
 <table class="rwd-table">
   <tr>
     <th>Matricule</th>
@@ -49,4 +54,3 @@
   <%end%>
 
 </table>
-<%= link_to "Retour", managers_path, class: "btn btn-danger"%>
