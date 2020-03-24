@@ -7,8 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+Request.destroy_all
 User.destroy_all
 Team.destroy_all
+
 
 require 'csv'
 
@@ -37,7 +39,7 @@ CSV.foreach(filepath, csv_options) do |row|
     team = Team.where(name: row['Direction'])
   end
 
-  User.create(matricule: row['Mat'],nom: row['Nom'],
+  User.create(matricule: row['Mat'],nom: row['Nom'],username: row['Mat'],
     prenom: row['Prénom'],direction: row['Direction'],service: row['Service'],
     emploi: row['Emploi'],
     datedenaissance: row['Date Naiss.'],datedembauche: row['Date Emb.'],email: row['email'],
