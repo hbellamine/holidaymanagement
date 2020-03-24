@@ -6,7 +6,8 @@
 
           <center><p class="title">Plateforme de gestion des congés </p></center>
         <div class="form-inputs">
-            <%= f.input :email,
+            <%= f.input :login,
+                        label: "Email ou Matricule",
                         required: false,
                         autofocus: true,
                         input_html: { autocomplete: "Email"}
